@@ -16,52 +16,64 @@ namespace TBD.Patches
             [HarmonyPostfix]
             public static void Postfix(LanceConfiguratorPanel __instance)
             {
-                if (__instance == null || __instance.slotMaxTonnages == null)
+                if (__instance == null || __instance.maxUnits <= __instance.slotMinTonnages.Length)
                     return;
 
-                float lastValidMinTonnage = -1f;
-                for (int i = __instance.slotMinTonnages.Length - 1; i >= 0; i--)
-                {
-                    if (i < __instance.maxUnits && __instance.slotMinTonnages[i] >= 0f)
-                    {
-                        lastValidMinTonnage = __instance.slotMinTonnages[i];
-                        break;
-                    }
-                }
+                var minLimit = GetLastValidTonnage(__instance.slotMinTonnages, __instance.maxUnits);
+                var maxLimit = GetLastValidTonnage(__instance.slotMaxTonnages, __instance.maxUnits);
 
-                float lastValidMaxTonnage = -1f;
-                for (int i = __instance.slotMaxTonnages.Length - 1; i >= 0; i--)
+                if (minLimit >= 0 || maxLimit >= 0)
                 {
-                    if (i < __instance.maxUnits && __instance.slotMaxTonnages[i] >= 0f)
-                    {
-                        lastValidMaxTonnage = __instance.slotMaxTonnages[i];
-                        break;
-                    }
-                }
+                    var newMinArray = new float[__instance.maxUnits];
+                    var newMaxArray = new float[__instance.maxUnits];
 
-                for (int i = 0; i < __instance.slotMinTonnages.Length; i++)
-                {
-                    __instance.slotMinTonnages[i] = i >= __instance.maxUnits ? 0f : lastValidMinTonnage;
-                    __instance.slotMaxTonnages[i] = i >= __instance.maxUnits ? 0f : lastValidMaxTonnage;
-
-                    if (__instance.loadoutSlots != null && i < __instance.loadoutSlots.Length)
+                    for (int i = 0; i < __instance.maxUnits; i++)
                     {
-                        var slot = __instance.loadoutSlots[i];
-                        if (slot.dropTonnageElement != null && slot.dropTonnageText != null)
+                        newMinArray[i] = i < __instance.slotMinTonnages.Length ? __instance.slotMinTonnages[i] : minLimit;
+                        newMaxArray[i] = i < __instance.slotMaxTonnages.Length ? __instance.slotMaxTonnages[i] : maxLimit;
+
+                        if (i < __instance.loadoutSlots.Length)
                         {
-                            bool showTonnage = (__instance.slotMinTonnages[i] >= 0f) || (__instance.slotMaxTonnages[i] >= 0f);
-                            slot.dropTonnageElement.SetActive(showTonnage);
-
-                            if (__instance.slotMinTonnages[i] >= 0f && __instance.slotMaxTonnages[i] >= 0f)
-                                slot.dropTonnageText.SetText("{0} - {1} Tons", __instance.slotMinTonnages[i], __instance.slotMaxTonnages[i]);
-                            else if (__instance.slotMinTonnages[i] >= 0f)
-                                slot.dropTonnageText.SetText("Min: {0} Tons", __instance.slotMinTonnages[i]);
-                            else if (__instance.slotMaxTonnages[i] >= 0f)
-                                slot.dropTonnageText.SetText("Max: {0} Tons", __instance.slotMaxTonnages[i]);
+                            var slot = __instance.loadoutSlots[i];
+                            UpdateSlotUI(slot, newMinArray[i], newMaxArray[i]);
                         }
                     }
+
+                    __instance.slotMinTonnages = newMinArray;
+                    __instance.slotMaxTonnages = newMaxArray;
                 }
             }
+
+            private static float GetLastValidTonnage(float[] tonnageArray, int maxUnits)
+            {
+                for (int i = tonnageArray.Length - 1; i >= 0; i--)
+                {
+                    if (i < maxUnits && tonnageArray[i] >= 0f)
+                    {
+                        return tonnageArray[i];
+                    }
+                }
+                return -1f;
+            }
+
+            private static void UpdateSlotUI(LanceLoadoutSlot slot, float min, float max)
+            {
+                if (slot?.dropTonnageElement == null || slot.dropTonnageText == null) return;
+
+                bool hasLimit = min >= 0f || max >= 0f;
+                slot.dropTonnageElement.SetActive(hasLimit);
+
+                if (hasLimit)
+                {
+                    if (min >= 0f && max >= 0f)
+                        slot.dropTonnageText.SetText("{0} - {1} Tons", min, max);
+                    else if (min >= 0f)
+                        slot.dropTonnageText.SetText("Min: {0} Tons", min);
+                    else
+                        slot.dropTonnageText.SetText("Max: {0} Tons", max);
+                }
+            }
+
         }
     }
 }
