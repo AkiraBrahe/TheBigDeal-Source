@@ -89,10 +89,7 @@ namespace TBD.Patches
                 }
             }
 
-            public static bool IsConsecutiveAndNotTBDContract(ContractOverride contractOverride)
-            {
-                return contractOverride != null && (contractOverride.disableCancelButton && !Main.TBDContractIds.Contains(contractOverride.ID));
-            }
+            public static bool IsConsecutiveAndNotTBDContract(ContractOverride contractOverride) => contractOverride != null && contractOverride.disableCancelButton && !Main.TBDContractIds.Contains(contractOverride.ID);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace TBD.Patches
             {
                 if (action.Type == SimGameResultAction.ActionType.System_PlayVideo && action.value == "mcb_exit_bt")
                 {
-                    SimGameState simGame = UnityGameInstance.BattleTechGame.Simulation;
+                    var simGame = UnityGameInstance.BattleTechGame.Simulation;
                     simGame.CompanyStats.Set("Funds", -10000000);
                     simGame.InterruptQueue.QueueLossOutcome();
                     return false;

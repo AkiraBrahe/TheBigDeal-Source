@@ -114,7 +114,7 @@ namespace TBD
         {
             try
             {
-                Assembly cacAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(asm => asm.GetName().Name.Equals("CustomAmmoCategories"));
+                var cacAssembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(asm => asm.GetName().Name.Equals("CustomAmmoCategories"));
                 if (cacAssembly == null)
                     return false;
 
