@@ -24,7 +24,12 @@ namespace TBD.Patches
                     __instance.RangeSplit = [ 9f * TTWpnRangeMetresPerPoint,
                                              19f * TTWpnRangeMetresPerPoint,
                                              28f * TTWpnRangeMetresPerPoint ];
-                    __instance.Description.Details = "A Star League era relic using lost technology, the Rail Gun electromagnetically hurls massive metal projectiles. Like Gauss Rifles, Rail Guns do not suffer recoil effects from firing and have a baseline bonus to accuracy.\n\nRail Guns explode if destroyed, taking the entire mounted location with them.";
+
+                    if (__instance.Description.Id is "Weapon_Gauss_RailGun_2-BL" or "Weapon_Gauss_RailGun_2-BS")
+                        __instance.Description.Details = "A Star League era relic using lost technology, the Rail Gun electromagnetically hurls massive metal projectiles. Those who assembled The General stripped the weapon of everything they could, which allowed it to be lightened to 25 tons, but at the expense of significantly worse heat dissipation. And there's no guarantee it's safe to fire...";
+                    else
+                        __instance.Description.Details = "A Star League era relic using lost technology, the Rail Gun electromagnetically hurls massive metal projectiles. Like Gauss Rifles, Rail Guns do not suffer recoil effects from firing.";
+                    __instance.Description.Details += "\n\nRail Guns explode if destroyed, taking the entire mounted location with them.";
                 }
             }
         }
