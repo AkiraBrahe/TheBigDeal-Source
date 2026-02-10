@@ -3,7 +3,7 @@
     <Title>The Big Deal Add-On</Title>
     <Authors>mcb, Kierk</Authors>
     <Copyright>Copyright © 2024</Copyright>
-    <Version>1.7.3</Version>
+    <Version>1.7.4</Version>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -20,7 +20,7 @@
     <OutputPath>..\</OutputPath>
   </PropertyGroup>
   <Target Name="CopyDLLToModFolder" AfterTargets="Build">
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(BattleTechGameDir)\Mods\$(AssemblyName)\" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(BattleTechGameDir)\Mods\fps_TheBigDealBEXCE\" />
   </Target>
   <ItemGroup>
     <PackageReference Include="HarmonyX" Version="2.13.0">

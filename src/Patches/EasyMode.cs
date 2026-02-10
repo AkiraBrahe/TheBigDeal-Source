@@ -60,7 +60,7 @@ namespace TBD.Patches
             [HarmonyTargetMethod]
             public static MethodBase TargetMethod()
             {
-                var type = AccessTools.TypeByName("CustAmmoCategories.PreForceTakeContractSave");
+                var type = Type.GetType("CustAmmoCategories.PreForceTakeContractSave, CustAmmoCategories");
                 return type != null ? AccessTools.Method(type, "ApplyEventAction_prefix") : null;
             }
 
