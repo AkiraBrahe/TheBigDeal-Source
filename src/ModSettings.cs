@@ -1,10 +1,11 @@
-﻿namespace TBD
+namespace TBD
 {
     public class ModSettings
     {
         public EasyModeSettings EasyMode { get; set; } = new EasyModeSettings();
         public int ExternalHeatPerActivationCap { get; set; } = 45;
         public bool ScaleObjectiveBuildingStructure { get; set; } = false;
+        public bool ReduceSaveCompression { get; set; } = true;
     }
 
     public class EasyModeSettings

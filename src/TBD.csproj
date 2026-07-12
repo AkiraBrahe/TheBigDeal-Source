@@ -40,9 +40,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp" />
-    <Reference Include="BiggerDrops">
-      <HintPath>$(BattleTechGameDir)\Mods\BiggerDrops\BiggerDrops.dll</HintPath>
-    </Reference>
     <Reference Include="Extended_CE">
       <HintPath>$(BattleTechGameDir)\Mods\BT_Extended_CE\Extended_CE.dll</HintPath>
     </Reference>

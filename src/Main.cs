@@ -1,4 +1,4 @@
-﻿using HBS.Logging;
+using HBS.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -53,6 +53,10 @@ namespace TBD
             // Disable building structure scaling
             if (!Settings.ScaleObjectiveBuildingStructure)
                 IRTweaks.Mod.Config.Fixes.ScaleObjectiveBuildingStructure = false;
+
+            // Fix long save times by reducing save compression
+            if (Settings.ReduceSaveCompression)
+                IRTweaks.Mod.Config.Fixes.ReduceSaveCompression = true;
         }
 
         internal static void LoadTBDContractIds()
