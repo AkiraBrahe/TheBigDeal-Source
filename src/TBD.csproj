@@ -3,7 +3,7 @@
     <Title>The Big Deal Add-On</Title>
     <Authors>mcb, Kierk</Authors>
     <Copyright>Copyright © 2024</Copyright>
-    <Version>1.7.4</Version>
+    <Version>1.7.5</Version>
   </PropertyGroup>
   <PropertyGroup>
     <OutputType>Library</OutputType>
@@ -62,5 +62,8 @@
     <Reference Include="UnityEngine" />
     <Reference Include="UnityEngine.CoreModule" />
     <Reference Include="UnityEngine.UI" />
+    <Reference Include="VMMWSGC">
+      <HintPath>$(BattleTechGameDir)\Mods\VMMWSGC\VMMWSGC.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

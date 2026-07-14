@@ -54,9 +54,11 @@ namespace TBD
             if (!Settings.ScaleObjectiveBuildingStructure)
                 IRTweaks.Mod.Config.Fixes.ScaleObjectiveBuildingStructure = false;
 
-            // Fix long save times by reducing save compression
-            if (Settings.ReduceSaveCompression)
+            // Fix long save times by configuring save compression
+            if (Settings.SaveCompressionMode == SaveCompressionMode.Reduced)
                 IRTweaks.Mod.Config.Fixes.ReduceSaveCompression = true;
+            else if (Settings.SaveCompressionMode == SaveCompressionMode.Disabled)
+                VMMWSGC.Main.Settings.OverrideSaveSystem = true;
         }
 
         internal static void LoadTBDContractIds()

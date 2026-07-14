@@ -1,11 +1,18 @@
 namespace TBD
 {
+    public enum SaveCompressionMode
+    {
+        Normal = 0,
+        Reduced = 1,
+        Disabled = 2
+    }
+
     public class ModSettings
     {
         public EasyModeSettings EasyMode { get; set; } = new EasyModeSettings();
-        public int ExternalHeatPerActivationCap { get; set; } = 45;
+        public int ExternalHeatPerActivationCap { get; set; } = 1500;
         public bool ScaleObjectiveBuildingStructure { get; set; } = false;
-        public bool ReduceSaveCompression { get; set; } = true;
+        public SaveCompressionMode SaveCompressionMode { get; set; } = SaveCompressionMode.Disabled;
     }
 
     public class EasyModeSettings
